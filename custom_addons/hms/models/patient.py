@@ -43,6 +43,7 @@ class Patient(models.Model):
     ], default='undetermined')
 
     state_logs = fields.One2many('hms.patient.log', 'patient_id')
+    created_by = fields.Many2one('res.users', string="Created By", default=lambda self: self.env.user)
 
     @api.onchange('pcr')
     def _onchange_pcr(self):

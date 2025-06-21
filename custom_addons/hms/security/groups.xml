@@ -1,0 +1,61 @@
+<odoo>
+
+    <record id="group_hms_user" model="res.groups">
+        <field name="name">HMS User</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="group_hms_manager" model="res.groups">
+        <field name="name">HMS Manager</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+
+    <record id="access_hms_patient_user" model="ir.model.access">
+        <field name="name">access.hms.patient.user</field>
+        <field name="model_id" ref="model_hms_patient"/>
+        <field name="group_id" ref="hms.group_hms_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="access_hms_department_user" model="ir.model.access">
+        <field name="name">access.hms.department.user</field>
+        <field name="model_id" ref="model_hms_department"/>
+        <field name="group_id" ref="hms.group_hms_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="access_hms_doctors_user" model="ir.model.access">
+        <field name="name">access.hms.doctors.user</field>
+        <field name="model_id" ref="model_hms_doctors"/>
+        <field name="group_id" ref="hms.group_hms_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+
+    <record id="view_hms_patient_form_inherit_hide_doctors" model="ir.ui.view">
+        <field name="name">view.patient.form.inherit.hide.doctors</field>
+        <field name="model">hms.patient</field>
+        <field name="inherit_id" ref="hms.view_hms_patient_form"/>
+        <field name="arch" type="xml">
+            <field name="doctor_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+                <attribute name="groups">hms.group_hms_user</attribute>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="hms_doctor_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('hms.group_hms_manager')])]"/>
+    </record>
+</odoo>

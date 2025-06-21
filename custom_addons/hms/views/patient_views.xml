@@ -32,7 +32,9 @@
                                        context="{'form_view_ref': 'hms.view_hms_department_form'}"
                                        options="{'no_create': True}"/>
                                 <field name="doctor_ids" widget="many2many_tags"
-                                       modifiers="{'readonly': [['doctor_readonly', '=', True]]}"/>
+                                       modifiers="{'readonly': [['doctor_readonly', '=', True]]}"
+                                       groups="hms.group_hms_manager"
+                                />
 
 
                             </group>
@@ -67,6 +69,19 @@
             </tree>
         </field>
     </record>
+
+    <record id="view_hms_patient_form_inherit_show_doctors_manager" model="ir.ui.view">
+    <field name="name">view.patient.form.inherit.show.doctors.manager</field>
+    <field name="model">hms.patient</field>
+    <field name="inherit_id" ref="hms.view_hms_patient_form"/>
+    <field name="priority" eval="20"/>
+    <field name="arch" type="xml">
+        <field name="doctor_ids" position="attributes">
+            <attribute name="invisible">0</attribute>
+            <attribute name="groups">hms.group_hms_manager</attribute>
+        </field>
+    </field>
+</record>
 
 
     <menuitem id="hms_menu_root" name="Hospital" sequence="1"/>

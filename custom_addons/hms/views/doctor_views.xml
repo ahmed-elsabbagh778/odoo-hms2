@@ -39,5 +39,7 @@
     <menuitem id="hms_doctor_menu" name="Doctors" parent="hms_menu_root"/>
     <menuitem id="hms_doctor_menu_item" name="All Doctors"
               parent="hms_doctor_menu"
-              action="hms_doctor_action"/>
+              action="hms_doctor_action"
+              groups="hms.group_hms_manager"
+    />
 </odoo>
